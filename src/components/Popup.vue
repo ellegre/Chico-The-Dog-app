@@ -32,6 +32,7 @@
 
 <script>
 import moment from 'moment'
+import db from '@/fb'
 
 export default {
   data () {
@@ -56,8 +57,17 @@ export default {
   methods: {
     submit () {
       if (this.$refs.form.validate()) {
-        console.log(this.title, this.content)
-        this.$refs.form.reset()
+        const project = {
+          title: this.title,
+          content: this.content,
+          due: moment(this.due).format('Do MMMM YYYY'),
+          person: 'The Chico',
+          status: 'ongoing'
+        }
+        // this.$refs.form.reset()
+        db.collection('projects').add(project).then(() => {
+          console.log('added to db')
+        })
       }
     }
   }
