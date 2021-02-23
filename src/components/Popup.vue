@@ -20,7 +20,7 @@
               <v-date-picker v-model="due"></v-date-picker>
             </v-menu>
             <v-spacer></v-spacer>
-            <v-btn text class="success mx-0 mt-3" @click="submit">
+            <v-btn text class="success mx-0 mt-3" @click="submit" :loading="loading">
               Add project
             </v-btn>
           </v-form>
@@ -43,6 +43,7 @@ export default {
       inputRules: [
         v => (v && v.length >= 3) || 'Minimum length is 3 characters'
       ],
+      loading: false,
       dialog: false,
       notifications: false,
       sound: true,
@@ -57,6 +58,7 @@ export default {
   methods: {
     submit () {
       if (this.$refs.form.validate()) {
+        this.loading = true
         const project = {
           title: this.title,
           content: this.content,
@@ -64,9 +66,12 @@ export default {
           person: 'The Chico',
           status: 'ongoing'
         }
-        // this.$refs.form.reset()
+
         db.collection('projects').add(project).then(() => {
-          console.log('added to db')
+          this.loading = false
+          this.dialog = false
+          this.$emit('projectAdded')
+          this.$refs.form.reset()
         })
       }
     }
