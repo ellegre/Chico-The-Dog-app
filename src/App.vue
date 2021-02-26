@@ -2,7 +2,7 @@
   <v-app color="green lighten-4">
     <Navbar/>
     <v-main color="green lighten-4">
-    <router-view/>
+      <router-view/>
     </v-main>
   </v-app>
 </template>

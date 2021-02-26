@@ -1,10 +1,10 @@
 <template>
   <div class="team">
     <h1 class="subtitle-1 grey--text">Team</h1>
-    <v-container fluid class="my-4">
+    <v-container class="my-4">
       <v-row wrap>
         <v-flex xs12 sm6 md4 lg3 v-for="person in team" :key="person.id">
-          <v-card class="text-center ma-3" color="grey lighten-5">
+          <v-card class="text-center ma-3" color="grey lighten-4">
             <v-responsive>
               <v-avatar size="100" class="mt-5" >
                 <img :src="person.avatar">
